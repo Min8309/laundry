@@ -95,28 +95,30 @@ document.addEventListener('visibilitychange', () => {
 });
 window.addEventListener('pagehide', stopMusic);
 
-// One continuous reader, with browser Back and accessible focus restoration.
-const reader = document.querySelector('#story-reader');
+// Chapter routes preserve browser Back, keyboard focus, and music playback.
+const readers = [...document.querySelectorAll('.chapter-reader')];
 function syncReader() {
-  const shouldRead = window.location.hash === '#father-suit';
+  const hash = window.location.hash;
+  const id = hash === '#father-suit' ? 'story-reader' : hash === '#father-suit-2' ? 'story-reader-2' : null;
   const wasReading = document.body.classList.contains('reading');
-  if (shouldRead) {
+  readers.forEach(r => r.hidden = r.id !== id);
+  if (id) {
     finishOpening();
     if (dialog.open) dialog.close();
-    reader.hidden = false;
     document.body.classList.add('reading');
-    document.title = '아버지의 양복 · 아직 따뜻한 세탁소';
+    document.title = '아버지의 양복' + (id === 'story-reader-2' ? ' 2장' : '') + ' · 아직 따뜻한 세탁소';
     window.scrollTo({top:0,behavior:'instant'});
-    document.querySelector('#reader-title').focus({preventScroll:true});
+    document.querySelector('#' + id + ' h1').focus({preventScroll:true});
   } else if (wasReading) {
-    reader.hidden = true;
     document.body.classList.remove('reading');
     document.title = '아직 따뜻한 세탁소 · The Laundry That Stays Warm';
-    const target = document.querySelector(window.location.hash === '#about' ? '#about' : '#stories');
+    const target = document.querySelector(hash === '#about' ? '#about' : '#stories');
     target.scrollIntoView({behavior:'instant'});
     if (target.id === 'stories') opener.focus({preventScroll:true});
   }
 }
 window.addEventListener('hashchange', syncReader);
-document.querySelector('.reader-end a[href="#father-suit"]').addEventListener('click', syncReader);
+document.querySelectorAll('.reader-end a[href^="#father-suit"]').forEach(a => a.addEventListener('click', () => {
+  if (a.getAttribute('href') === window.location.hash) syncReader();
+}));
 syncReader();
