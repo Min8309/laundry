@@ -15,38 +15,36 @@ h1{font-weight:700;font-size:clamp(50px,5.15vw,78px);letter-spacing:-.045em}.int
 @media(max-width:700px){.opening-captions{bottom:20%;font-size:14px}.opening-replay{right:6%;bottom:22px}.opening-replay span{font-size:9px}.opening-skip{right:6%;bottom:28px}.is-opening .masthead{background:linear-gradient(#0b131ad9,transparent)}.opening-scene img{object-fit:cover;object-position:54% center;animation-name:alley-walk-mobile}.scroll-cue{left:27%}@keyframes alley-walk-mobile{0%{transform:scale(1.65) translate(29%,3%);filter:brightness(.5) saturate(.65)}34%{transform:scale(1.55) translate(19%,1%);filter:brightness(.58) saturate(.8)}70%{transform:scale(1.35) translate(-5%,0);filter:brightness(.88) saturate(.95)}100%{transform:scale(1.2) translate(-15%,0);filter:brightness(1) saturate(1)}}}
 @media(prefers-reduced-motion:reduce){.opening{display:none!important}.is-opening .hero-copy{animation:none!important;opacity:1;transform:none}.opening-replay{display:none}.is-opening .hero-copy .enter{visibility:visible}.is-opening .image-note,.is-opening .scroll-cue{visibility:visible}}
 @media(max-width:700px){.opening-scene img{position:absolute;left:0;top:0;width:auto;min-width:100%;max-width:none;height:100%;object-fit:contain;transform-origin:50% 50%}@keyframes alley-walk-mobile{0%{transform:translateX(-12%) scale(1.08);filter:brightness(.55) saturate(.65)}34%{transform:translateX(-27%) scale(1.1);filter:brightness(.65) saturate(.8)}70%{transform:translateX(-57%) scale(1.12);filter:brightness(.9) saturate(.95)}100%{transform:translateX(-68%) scale(1.14);filter:brightness(1) saturate(1)}}}
-/* Hand-drawn ink buttons: the lettering stays still while the outline boils. */
-.hand-drawn{--button-ink:#d8bf89;--button-line:#b8a782;--button-wash:#e2c58d14;position:relative;isolation:isolate;border:1.5px solid var(--button-line);border-radius:16em 1.8em 14em 1.8em / 1.8em 14em 1.8em 16em;background:#19201dd9;color:var(--paper);font-family:var(--serif);padding:.75em 1.7em;min-height:44px;transition:color .2s,background-color .2s,border-color .2s;overflow:visible}
-.hand-drawn::before,.hand-drawn::after{content:"";position:absolute;pointer-events:none;z-index:-1}
-.hand-drawn::before{inset:-.25em -.15em -.1em -.3em;border:1px solid #d8bf8959;border-radius:inherit;transform:rotate(-1.2deg);transform-origin:center}
-.hand-drawn::after{inset:.3em .5em;border-radius:inherit;background:repeating-linear-gradient(-55deg,transparent 0 4px,#d8bf892b 4px 5px,transparent 5px 9px);clip-path:inset(0 100% 0 0);transition:clip-path .45s ease;opacity:.55}
-.hand-drawn:focus-visible{outline:2px solid #f4d9a0;outline-offset:7px;border-color:#e8ce9b;color:#fff2d8}
-.hand-drawn:focus-visible::after{clip-path:inset(0)}
-.hand-drawn:focus-visible::before{animation:ink-boil .45s steps(2,end) infinite}
-.hand-drawn:active{background:#e2c58d1f;border-color:var(--gold)}
-.enter.hand-drawn{padding:13px 25px;gap:40px;font-size:13px;margin:5px 0;min-height:50px}
-.opening-skip.hand-drawn{position:absolute;padding:10px 19px;font-size:12px;background:#111a19eb}
-.opening-replay.hand-drawn{position:absolute;padding:9px 16px;font-size:16px;background:#15201a9c;min-height:44px}
-.opening-replay.hand-drawn span{font-size:10px}
-.episode.hand-drawn{border-radius:3% 1% 3% 1% / 11% 3% 10% 4%;padding:30px 24px;background:#d8bf8903}
-.episode.hand-drawn::before{inset:-4px -2px -2px -4px;transform:rotate(-.35deg)}
-.episode.hand-drawn::after{opacity:.24}
-.close.hand-drawn{position:absolute;right:17px;top:17px;width:44px;height:44px;padding:0;font-family:inherit;font-size:25px;line-height:1;border-radius:48% 53% 46% 52%;background:transparent}
-.back.hand-drawn{padding:15px 19px;font-size:12px;margin-top:30px}
-@keyframes ink-boil{0%,100%{border-radius:16em 1.8em 14em 1.8em / 1.8em 14em 1.8em 16em;transform:rotate(-1.2deg) translate(0,0)}33%{border-radius:14em 2.2em 16em 2em / 2em 16em 2em 14em;transform:rotate(-.65deg) translate(.3px,-.3px)}66%{border-radius:17em 1.7em 12em 2.3em / 2.2em 12em 1.6em 16em;transform:rotate(-1.45deg) translate(-.3px,.2px)}}
-@media(hover:hover) and (pointer:fine){.hand-drawn:hover{color:#fff2d8;border-color:#e8ce9b;background-color:#e2c58d0d}.hand-drawn:hover::after{clip-path:inset(0)}.hand-drawn:hover::before{animation:ink-boil .45s steps(2,end) infinite}.episode.hand-drawn:hover::before,.episode.hand-drawn:focus-visible::before{animation:card-ink-boil .45s steps(2,end) infinite}}
-@keyframes card-ink-boil{0%,100%{transform:rotate(-.35deg)}50%{transform:rotate(.15deg) translate(.3px,-.3px)}}
-@media(max-width:700px){.enter.hand-drawn{font-size:12px;padding:12px 22px;gap:35px}.episode.hand-drawn{padding:25px 14px}.episode.hand-drawn .episode-number{margin-right:15px}.episode.hand-drawn .jacket{width:50px}.episode.hand-drawn .episode-arrow{margin-left:8px}.opening-replay.hand-drawn{padding:9px 12px}.opening-replay.hand-drawn span{font-size:9px}.opening-skip.hand-drawn{font-size:11px}.back.hand-drawn{font-size:11px}.close.hand-drawn{right:15px;top:14px}}
-@media(prefers-reduced-motion:reduce){.hand-drawn,.hand-drawn::before,.hand-drawn::after{animation:none!important;transition:none!important}.hand-drawn:focus-visible::before{animation:none!important}}
-.episode.hand-drawn:focus-visible::before{animation:card-ink-boil .45s steps(2,end) infinite}.close.hand-drawn:focus-visible::before{animation:card-ink-boil .45s steps(2,end) infinite}@media(hover:hover) and (pointer:fine){.close.hand-drawn:hover::before{animation:card-ink-boil .45s steps(2,end) infinite}}@media(prefers-reduced-motion:reduce){.episode.hand-drawn:focus-visible::before,.close.hand-drawn:focus-visible::before{animation:none!important}}
-.episode-title{word-break:keep-all}@media(max-width:360px){.episode.hand-drawn .jacket{display:none}.episode.hand-drawn .episode-arrow{margin-left:auto;padding-left:10px}.episode.hand-drawn .episode-title{font-size:23px;white-space:nowrap}}
-/* Sound is always opt-in, including during the opening. */
-.sound-dock{position:fixed;right:5.5%;top:104px;z-index:6;display:flex;align-items:center;gap:13px;padding:0;max-width:calc(100vw - 36px)}
-.sound-toggle.hand-drawn{font-family:var(--serif);display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:10px 17px;font-size:11px;background:#15201bea;white-space:nowrap}
+/* Soft amber breathing glow. Text and borders stay stable. */
+.glow-button{--c:#e7b86c;--glow-soft:rgba(231,184,108,.18);--glow-bright:rgba(245,190,102,.42);position:relative;isolation:isolate;border:1px solid #c4a66e99;border-radius:999px;background:#18201ded;color:var(--paper);font-family:var(--serif);padding:.75em 1.7em;min-height:44px;overflow:visible;transition:color .3s,background-color .3s,border-color .3s,box-shadow .3s;box-shadow:inset 0 1px 0 #e9cc9010}
+.glow-button::before{content:"";position:absolute;inset:-5px;border-radius:inherit;background:var(--c);filter:blur(18px);opacity:0;pointer-events:none;z-index:-1}
+.glow-button::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid transparent;pointer-events:none;transition:border-color .3s}
+.glow-button:focus-visible{outline:2px solid #f8dca5;outline-offset:6px;color:#fff4df;border-color:#edcb91;box-shadow:0 0 15px var(--glow-soft)}
+.glow-button:focus-visible::before{animation:glow-appear .5s ease both,glow-breathe 2.6s .5s ease-in-out infinite}
+.glow-button:focus-visible::after{border-color:#f1d49e44}
+.glow-button:active{background:#343426;color:#fff4df;border-color:#f5d59d;box-shadow:0 0 24px var(--glow-bright)}
+.glow-button:active::before{opacity:.22}
+.enter.glow-button{padding:13px 25px;gap:40px;font-size:13px;margin:5px 0;min-height:50px}
+.opening-skip.glow-button{position:absolute;padding:10px 19px;font-size:12px;background:#111a19eb}
+.opening-replay.glow-button{position:absolute;padding:9px 16px;font-size:16px;background:#15201ac9;min-height:44px}
+.opening-replay.glow-button span{font-size:10px}
+.episode.glow-button{border-radius:28px;padding:30px 24px;background:#d8bf8903}
+.episode.glow-button::before{inset:3px;filter:blur(26px)}
+.close.glow-button{position:absolute;right:17px;top:17px;width:44px;height:44px;padding:0;font-family:inherit;font-size:25px;line-height:1;border-radius:50%;background:#1c241f}
+.back.glow-button{padding:15px 19px;font-size:12px;margin-top:30px}
+@keyframes glow-appear{from{opacity:0;transform:scale(.97)}to{opacity:.2;transform:scale(1)}}
+@keyframes glow-breathe{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.38;transform:scale(1.045)}}
+@media(hover:hover) and (pointer:fine){.glow-button:hover{color:#fff4df;border-color:#edcb91;background-color:#2b2c21;box-shadow:0 0 18px var(--glow-soft)}.glow-button:hover::before{animation:glow-appear .5s ease both,glow-breathe 2.6s .5s ease-in-out infinite}.glow-button:hover::after{border-color:#f1d49e44}}
+@media(max-width:700px){.enter.glow-button{font-size:12px;padding:12px 22px;gap:35px}.episode.glow-button{padding:25px 14px;border-radius:22px}.episode.glow-button .episode-number{margin-right:15px}.episode.glow-button .jacket{width:50px}.episode.glow-button .episode-arrow{margin-left:8px}.opening-replay.glow-button{padding:9px 12px}.opening-replay.glow-button span{font-size:9px}.opening-skip.glow-button{font-size:11px}.back.glow-button{font-size:11px}.close.glow-button{right:15px;top:14px}}
+.episode-title{word-break:keep-all}@media(max-width:360px){.episode.glow-button .jacket{display:none}.episode.glow-button .episode-arrow{margin-left:auto;padding-left:10px}.episode.glow-button .episode-title{font-size:23px;white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){.glow-button,.glow-button::before,.glow-button::after{animation:none!important;transition:none!important}.glow-button:focus-visible::before,.glow-button:hover::before{opacity:.22;transform:none}}
+/* User-controlled music at the lower right, clear of the opening controls. */
+.sound-dock{position:fixed;right:max(24px,env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom));z-index:6;display:flex;align-items:center;max-width:calc(100vw - 36px)}
+.sound-toggle.glow-button{font-family:var(--serif);display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:10px 17px;font-size:11px;background:#15201bf5;white-space:nowrap}
 .sound-icon{color:var(--gold);font:18px Georgia,serif}.sound-toggle[aria-pressed="true"] .sound-icon{color:#f9dda0}
-.sound-volume{display:flex;align-items:center;gap:10px;padding:5px 13px;min-height:44px;background:#15201bf0;border:1px solid #b8a78266;border-radius:5px;color:var(--paper);font-size:10px}
-.sound-volume[hidden]{display:none}.sound-volume input{width:85px;height:32px;margin:0;accent-color:var(--gold);cursor:pointer}.sound-volume input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}.sound-volume output{min-width:27px}.sound-status:empty{display:none}.sound-status{position:absolute;right:0;top:58px;padding:10px 13px;background:#15201bf5;border:1px solid #b8a78266;font-size:11px;line-height:1.6;width:230px}
-@media(max-width:700px){.sound-dock{top:88px;right:6%;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:88%}.sound-toggle.hand-drawn{padding:8px 13px;font-size:10px}.sound-volume{padding:4px 9px;gap:7px}.sound-volume input{width:65px}}
-@media(max-width:360px){.sound-dock{gap:7px}.sound-volume{gap:5px}.sound-volume input{width:52px}}
-/* Keep the audio controls with the opening, not floating over story text. */
-.sound-dock{position:absolute}
+.sound-toggle.glow-button[aria-pressed="true"]{border-color:#edcb91;box-shadow:0 0 14px #e7b86c24}.sound-toggle.glow-button[aria-pressed="true"]::after{border-color:#f1d49e44}
+.sound-status:empty{display:none}.sound-status{position:absolute;right:0;bottom:58px;padding:10px 13px;background:#15201bf5;border:1px solid #b8a78266;border-radius:10px;font-size:11px;line-height:1.6;width:230px}
+.opening-replay.glow-button{right:auto;left:8%;bottom:calc(29px + env(safe-area-inset-bottom))}
+.opening-skip.glow-button{right:auto;left:8%;bottom:calc(29px + env(safe-area-inset-bottom))}
+footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+@media(max-width:700px){.sound-dock{right:max(18px,env(safe-area-inset-right));bottom:calc(22px + env(safe-area-inset-bottom))}.sound-toggle.glow-button{padding:9px 14px;font-size:10px}.opening-replay.glow-button,.opening-skip.glow-button{left:6%;bottom:calc(22px + env(safe-area-inset-bottom))}.scroll-cue{left:53%;bottom:calc(30px + env(safe-area-inset-bottom))}.scroll-cue span:first-child{display:none}}

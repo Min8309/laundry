@@ -10,8 +10,7 @@
 <a class="skip" href="#stories">이야기로 바로 가기</a>
 <header class="masthead"><a class="brand" href="./" aria-label="아직 따뜻한 세탁소, 처음으로"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M13 9a3 3 0 1 1 5 2c-1 1-2 1-2 3v2L5 23a2 2 0 0 0 1 3h20a2 2 0 0 0 1-3l-11-7"/></svg><span>아직 따뜻한 세탁소</span></a><nav aria-label="주 메뉴"><a href="#stories">이야기</a><a href="#about">세탁소 소개</a></nav></header>
 <aside class="sound-dock" aria-label="배경 음악">
-  <button class="sound-toggle hand-drawn" type="button" aria-pressed="false" aria-controls="background-music sound-volume"><span class="sound-icon" aria-hidden="true">♫</span><span class="sound-label">음악 켜기</span></button>
-  <div class="sound-volume" id="sound-volume" hidden><label for="music-volume">음량</label><input id="music-volume" type="range" min="0" max="100" value="25" step="5" aria-label="배경 음악 음량"><output for="music-volume">25%</output></div>
+  <button class="sound-toggle glow-button" type="button" aria-pressed="false" aria-controls="background-music"><span class="sound-icon" aria-hidden="true">♫</span><span class="sound-label">음악 켜기</span></button>
   <span class="sound-status" role="status" aria-live="polite"></span>
 </aside>
 <audio id="background-music" preload="none" loop muted><source src="assets/background-music.mp3" type="audio/mpeg"></audio>
@@ -22,17 +21,17 @@
 <div class="opening" id="opening" hidden aria-label="세탁소로 향하는 10초의 골목길">
   <div class="opening-scene" aria-hidden="true"><img src="assets/laundry-dusk.webp" alt=""><div class="opening-dark"></div><div class="opening-glow"></div></div>
   <div class="opening-captions" aria-hidden="true"><p>하루가 저문 골목을 따라</p><p>아직 꺼지지 않은 불빛 하나</p><p>그 문 앞에, 당신이 도착합니다.</p></div>
-  <button class="opening-skip hand-drawn" type="button">건너뛰기 <span aria-hidden="true">↗</span></button>
+  <button class="opening-skip glow-button" type="button">건너뛰기 <span aria-hidden="true">↗</span></button>
   <div class="opening-progress" aria-hidden="true"><span></span></div>
 </div>
-<div class="hero-copy"><p class="eyebrow"><span class="light" aria-hidden="true"></span> 골목 끝, 불이 켜져 있습니다</p><h1 id="title">아직 따뜻한<br>세탁소</h1><p class="english" lang="en">The Laundry That Stays Warm</p><p class="intro">하루가 저물어도,<br>어떤 마음은 아직 따뜻합니다.</p><a class="enter hand-drawn" href="#stories">이야기를 만나러 가기 <span aria-hidden="true">↗</span></a></div>
-<button class="opening-replay hand-drawn" type="button" aria-label="골목길 오프닝 다시 보기">↺ <span>골목길 다시 걷기</span></button>
+<div class="hero-copy"><p class="eyebrow"><span class="light" aria-hidden="true"></span> 골목 끝, 불이 켜져 있습니다</p><h1 id="title">아직 따뜻한<br>세탁소</h1><p class="english" lang="en">The Laundry That Stays Warm</p><p class="intro">하루가 저물어도,<br>어떤 마음은 아직 따뜻합니다.</p><a class="enter glow-button" href="#stories">이야기를 만나러 가기 <span aria-hidden="true">↗</span></a></div>
+<button class="opening-replay glow-button" type="button" aria-label="골목길 오프닝 다시 보기">↺ <span>골목길 다시 걷기</span></button>
 <div class="image-note" aria-hidden="true">이야기가 머무는 곳<span></span></div><a class="scroll-cue" href="#stories" aria-label="아래 이야기 목록으로 이동"><span>천천히, 들어오세요</span><span aria-hidden="true">↓</span></a>
 </section>
-<section class="stories" id="stories" aria-labelledby="stories-title"><div class="section-label"><span class="eyebrow">THE STORIES</span><h2 id="stories-title">세탁소에 맡겨진 이야기</h2><p>옷 한 벌에 남아 있는, 마음 한 조각.</p></div><button class="episode hand-drawn" id="episode-open" aria-haspopup="dialog"><span class="episode-number">01</span><span class="episode-text"><span class="episode-kicker">첫 번째 이야기</span><span class="episode-title">아버지의 양복</span><span class="episode-state">본문 준비 중</span></span><svg class="jacket" viewBox="0 0 100 110" aria-hidden="true"><path d="m35 13 15 9 15-9 18 13 9 65-15 2-7-40 3 51H27l3-51-7 40-15-2 9-65Z"/><path d="m35 13 15 47 15-47M35 13l-8 21 12 4-6 10 17 18 17-18-6-10 12-4-8-21M50 60v44M58 70h8M58 86h8"/><circle cx="46" cy="77" r="1"/><circle cx="46" cy="89" r="1"/></svg><span class="episode-arrow" aria-hidden="true">↗</span></button></section>
+<section class="stories" id="stories" aria-labelledby="stories-title"><div class="section-label"><span class="eyebrow">THE STORIES</span><h2 id="stories-title">세탁소에 맡겨진 이야기</h2><p>옷 한 벌에 남아 있는, 마음 한 조각.</p></div><button class="episode glow-button" id="episode-open" aria-haspopup="dialog"><span class="episode-number">01</span><span class="episode-text"><span class="episode-kicker">첫 번째 이야기</span><span class="episode-title">아버지의 양복</span><span class="episode-state">본문 준비 중</span></span><svg class="jacket" viewBox="0 0 100 110" aria-hidden="true"><path d="m35 13 15 9 15-9 18 13 9 65-15 2-7-40 3 51H27l3-51-7 40-15-2 9-65Z"/><path d="m35 13 15 47 15-47M35 13l-8 21 12 4-6 10 17 18 17-18-6-10 12-4-8-21M50 60v44M58 70h8M58 86h8"/><circle cx="46" cy="77" r="1"/><circle cx="46" cy="89" r="1"/></svg><span class="episode-arrow" aria-hidden="true">↗</span></button></section>
 <section class="about" id="about" aria-labelledby="about-title"><span class="eyebrow">ABOUT THIS PLACE</span><h2 id="about-title">오래된 골목의,<br>작은 불빛 하나.</h2><div><p>낡은 간판과 손때 묻은 유리문.<br>그 너머로 은은한 온기가 새어 나옵니다.</p><p>아직 따뜻한 세탁소는<br>짧은 이야기들이 하나씩 걸리는 공간입니다.<br>잠시 머물다 가도 괜찮습니다.</p></div></section>
 </main>
 <footer><span>아직 따뜻한 세탁소</span><span lang="en">Some warmth stays.</span><a href="#title">처음으로 ↑</a></footer>
-<dialog id="episode-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description"><button class="close hand-drawn" aria-label="닫기">×</button><p class="eyebrow">첫 번째 이야기 · 01</p><h2 id="dialog-title">아버지의 양복</h2><span class="dialog-rule"></span><p id="dialog-description">이 이야기는 아직 준비 중입니다.<br>본문이 도착하면 이곳에서 만나실 수 있습니다.</p><button class="back hand-drawn">세탁소로 돌아가기 <span aria-hidden="true">↗</span></button></dialog>
+<dialog id="episode-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description"><button class="close glow-button" aria-label="닫기">×</button><p class="eyebrow">첫 번째 이야기 · 01</p><h2 id="dialog-title">아버지의 양복</h2><span class="dialog-rule"></span><p id="dialog-description">이 이야기는 아직 준비 중입니다.<br>본문이 도착하면 이곳에서 만나실 수 있습니다.</p><button class="back glow-button">세탁소로 돌아가기 <span aria-hidden="true">↗</span></button></dialog>
 <script src="app.js"></script>
 </body></html>

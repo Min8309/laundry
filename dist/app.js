@@ -53,9 +53,6 @@ if (!seenOpening && !window.location.hash && !reducedMotion.matches) startOpenin
 const music = document.querySelector('#background-music');
 const musicToggle = document.querySelector('.sound-toggle');
 const musicLabel = document.querySelector('.sound-label');
-const volumePanel = document.querySelector('.sound-volume');
-const volumeInput = document.querySelector('#music-volume');
-const volumeOutput = document.querySelector('.sound-volume output');
 const soundStatus = document.querySelector('.sound-status');
 let musicRequest = 0;
 music.volume = 0.25;
@@ -63,7 +60,6 @@ music.muted = true;
 function updateMusicUI(isPlaying) {
   musicToggle.setAttribute('aria-pressed', String(isPlaying));
   musicLabel.textContent = isPlaying ? '음악 끄기' : '음악 켜기';
-  volumePanel.hidden = !isPlaying;
 }
 function stopMusic() {
   musicRequest++;
@@ -79,7 +75,7 @@ musicToggle.addEventListener('click', async () => {
   }
   const request = ++musicRequest;
   music.muted = false;
-  music.volume = Number(volumeInput.value) / 100;
+  music.volume = 0.25;
   try {
     await music.play();
     if (request !== musicRequest) return;
@@ -89,10 +85,6 @@ musicToggle.addEventListener('click', async () => {
     stopMusic();
     soundStatus.textContent = '음악을 재생하지 못했어요. 다시 눌러 주세요.';
   }
-});
-volumeInput.addEventListener('input', () => {
-  music.volume = Number(volumeInput.value) / 100;
-  volumeOutput.textContent = `${volumeInput.value}%`;
 });
 music.addEventListener('error', () => {
   stopMusic();
