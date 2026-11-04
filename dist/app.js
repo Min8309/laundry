@@ -1,3 +1,4 @@
+const langText = s => window.laundryText ? window.laundryText(s) : s;
 const dialog = document.querySelector('#episode-dialog');
 const opener = document.querySelector('#episode-open');
 opener.addEventListener('click', () => dialog.showModal());
@@ -59,7 +60,7 @@ music.volume = 0.25;
 music.muted = true;
 function updateMusicUI(isPlaying) {
   musicToggle.setAttribute('aria-pressed', String(isPlaying));
-  musicLabel.textContent = isPlaying ? '음악 끄기' : '음악 켜기';
+  musicLabel.textContent = langText(isPlaying ? '음악 끄기' : '음악 켜기');
 }
 function stopMusic() {
   musicRequest++;
@@ -83,12 +84,12 @@ musicToggle.addEventListener('click', async () => {
   } catch (_) {
     if (request !== musicRequest) return;
     stopMusic();
-    soundStatus.textContent = '음악을 재생하지 못했어요. 다시 눌러 주세요.';
+    soundStatus.textContent = langText('음악을 재생하지 못했어요. 다시 눌러 주세요.');
   }
 });
 music.addEventListener('error', () => {
   stopMusic();
-  soundStatus.textContent = '음악을 불러오지 못했어요. 연결을 확인하고 다시 눌러 주세요.';
+  soundStatus.textContent = langText('음악을 불러오지 못했어요. 연결을 확인하고 다시 눌러 주세요.');
 });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && !music.paused) stopMusic();
@@ -106,12 +107,12 @@ function syncReader() {
     finishOpening();
     if (dialog.open) dialog.close();
     document.body.classList.add('reading');
-    document.title = '아버지의 양복' + (id === 'story-reader-2' ? ' 2장' : '') + ' · 아직 따뜻한 세탁소';
+    document.title = langText('아버지의 양복') + (id === 'story-reader-2' ? ' · ' + langText('2장') : '') + ' · ' + langText('아직 따뜻한 세탁소');
     window.scrollTo({top:0,behavior:'instant'});
     document.querySelector('#' + id + ' h1').focus({preventScroll:true});
   } else if (wasReading) {
     document.body.classList.remove('reading');
-    document.title = '아직 따뜻한 세탁소 · The Laundry That Stays Warm';
+    document.title = langText('아직 따뜻한 세탁소');
     const target = document.querySelector(hash === '#about' ? '#about' : '#stories');
     target.scrollIntoView({behavior:'instant'});
     if (target.id === 'stories') opener.focus({preventScroll:true});
