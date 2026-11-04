@@ -48,3 +48,17 @@ h1{font-weight:700;font-size:clamp(50px,5.15vw,78px);letter-spacing:-.045em}.int
 .opening-skip.glow-button{right:auto;left:8%;bottom:calc(29px + env(safe-area-inset-bottom))}
 footer{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
 @media(max-width:700px){.sound-dock{right:max(18px,env(safe-area-inset-right));bottom:calc(22px + env(safe-area-inset-bottom))}.sound-toggle.glow-button{padding:9px 14px;font-size:10px}.opening-replay.glow-button,.opening-skip.glow-button{left:6%;bottom:calc(22px + env(safe-area-inset-bottom))}.scroll-cue{left:53%;bottom:calc(30px + env(safe-area-inset-bottom))}.scroll-cue span:first-child{display:none}}
+
+/* A short introduction, without revealing the story. */
+dialog .story-status{font-size:11px;color:#aeb3a7;margin:22px 0;}
+
+/* Text-centered controls without decorative arrows. */
+.enter.glow-button,.back.glow-button,.opening-skip.glow-button,.opening-replay.glow-button{justify-content:center;text-align:center;gap:0}
+.enter.glow-button{min-width:220px}
+.episode.glow-button{justify-content:center;text-align:center}
+.episode.glow-button .episode-text{align-items:center;margin:0 auto;position:relative;z-index:1}
+.episode.glow-button .episode-number{position:absolute;left:20px;top:30px;margin:0}
+.episode.glow-button .jacket{position:absolute;right:18px;width:60px;opacity:.45;pointer-events:none}
+@media(max-width:700px){.enter.glow-button{min-width:205px}.episode.glow-button .episode-number{left:15px;top:24px}.episode.glow-button .jacket{display:none}}
+/* Quiet, continuous reading view; original manuscript paragraphs stay intact. */
+[hidden]{display:none!important}.read-story.glow-button{display:flex;justify-content:center;margin:30px 0 0;padding:15px;font-size:13px}.reading .masthead{position:relative}.reading main>section:not(#story-reader){display:none}.reading .opening-replay{display:none}.reader-nav{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:760px;margin:38px auto 0;padding:0 28px}.reader-return{display:inline-flex;align-items:center;justify-content:center;text-align:center;font-size:12px}.reader-article{max-width:700px;padding:30px 28px 60px;margin:auto}.reader-article h1{font-size:42px;line-height:1.6;margin:32px 0 60px;letter-spacing:-.04em}.story-body{font-family:var(--serif);font-size:18px;line-height:2.15;color:#dfdfd3;word-break:normal;overflow-wrap:anywhere}.story-body p{margin:0 0 1.65em}.story-body em{font-style:italic;color:#c9bd9e}.reader-end{max-width:700px;margin:0 auto 70px;padding:25px 28px;display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:12px;border-top:1px solid #c6b99726}.reading .sound-dock{opacity:.95}@media(max-width:700px){.reader-nav{padding:0 24px;margin-top:25px}.reader-nav .eyebrow{font-size:9px}.reader-article{padding:20px 24px 40px}.reader-article h1{font-size:32px;margin:24px 0 44px}.story-body{font-size:16px;line-height:2.1}.reader-end{padding:22px 24px;margin-bottom:85px;flex-wrap:wrap}.reader-return{font-size:11px}}

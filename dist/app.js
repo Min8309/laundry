@@ -94,3 +94,29 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden && !music.paused) stopMusic();
 });
 window.addEventListener('pagehide', stopMusic);
+
+// One continuous reader, with browser Back and accessible focus restoration.
+const reader = document.querySelector('#story-reader');
+function syncReader() {
+  const shouldRead = window.location.hash === '#father-suit';
+  const wasReading = document.body.classList.contains('reading');
+  if (shouldRead) {
+    finishOpening();
+    if (dialog.open) dialog.close();
+    reader.hidden = false;
+    document.body.classList.add('reading');
+    document.title = '아버지의 양복 · 아직 따뜻한 세탁소';
+    window.scrollTo({top:0,behavior:'instant'});
+    document.querySelector('#reader-title').focus({preventScroll:true});
+  } else if (wasReading) {
+    reader.hidden = true;
+    document.body.classList.remove('reading');
+    document.title = '아직 따뜻한 세탁소 · The Laundry That Stays Warm';
+    const target = document.querySelector(window.location.hash === '#about' ? '#about' : '#stories');
+    target.scrollIntoView({behavior:'instant'});
+    if (target.id === 'stories') opener.focus({preventScroll:true});
+  }
+}
+window.addEventListener('hashchange', syncReader);
+document.querySelector('.reader-end a[href="#father-suit"]').addEventListener('click', syncReader);
+syncReader();
