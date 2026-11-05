@@ -74,3 +74,6 @@ dialog .story-status{font-size:11px;color:#aeb3a7;margin:22px 0;}
 .reading .masthead{position:sticky;top:0;z-index:8;background:#171c1bf5;backdrop-filter:blur(12px)}.reader-article h1{scroll-margin-top:150px}
 
 html[lang=en] .hero-copy>.english{display:none}
+
+/* Chapter one narration */
+#story-reader .reader-article h1{margin-bottom:24px}.narration-player{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:0 0 48px}#narration-toggle{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:11px 20px;border:1px solid #c4a66e99;border-radius:999px;background:#ddbb7b0a;color:var(--paper);font-family:var(--serif);font-size:14px}#narration-toggle svg{fill:var(--gold);flex-shrink:0}.narration-note{font-size:11px;color:var(--muted)}.narration-status{flex-basis:100%;font-size:12px;color:var(--gold)}.narration-status:empty{display:none}@media(max-width:700px){.narration-player{margin-bottom:32px}}

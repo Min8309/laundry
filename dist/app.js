@@ -123,3 +123,34 @@ document.querySelectorAll('.reader-end a[href^="#father-suit"]').forEach(a => a.
   if (a.getAttribute('href') === window.location.hash) syncReader();
 }));
 syncReader();
+
+// Chapter one narration starts only on request and never overlaps the soundtrack.
+const narration = document.querySelector('#chapter-narration');
+const narrationToggle = document.querySelector('#narration-toggle');
+const narrationStatus = document.querySelector('.narration-status');
+function updateNarrationUI() {
+  const active = !narration.paused && !narration.ended;
+  const english = document.documentElement.lang === 'en';
+  narrationToggle.setAttribute('aria-pressed', String(active));
+  narrationToggle.querySelector('.narration-label').textContent = english ? (active ? 'Pause narration' : 'Listen to the story') : (active ? '일시정지' : '이야기 듣기');
+  narrationToggle.querySelector('.narration-play').toggleAttribute('hidden', active);
+  narrationToggle.querySelector('.narration-pause').toggleAttribute('hidden', !active);
+  document.querySelector('.narration-note').textContent = english ? 'Chapter 1 · Korean narration' : '1장 · 한국어 낭독';
+}
+narrationToggle.addEventListener('click', async () => {
+  narrationStatus.textContent = '';
+  if (!narration.paused) { narration.pause(); return; }
+  stopMusic();
+  try { await narration.play(); }
+  catch (_) { narrationStatus.textContent = document.documentElement.lang === 'en' ? 'Unable to play. Please try again.' : '음성을 재생하지 못했어요. 다시 눌러 주세요.'; }
+});
+['play', 'pause', 'ended'].forEach(event => narration.addEventListener(event, updateNarrationUI));
+narration.addEventListener('error', () => {
+  narrationStatus.textContent = document.documentElement.lang === 'en' ? 'Unable to load the narration. Please try again.' : '음성을 불러오지 못했어요. 다시 시도해 주세요.';
+});
+music.addEventListener('play', () => narration.pause());
+window.addEventListener('hashchange', () => { if (location.hash !== '#father-suit') narration.pause(); });
+window.addEventListener('pagehide', () => narration.pause());
+document.addEventListener('visibilitychange', () => { if (document.hidden) narration.pause(); });
+new MutationObserver(updateNarrationUI).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
+updateNarrationUI();
