@@ -154,7 +154,7 @@ window.addEventListener('pagehide', stopMusic);
 const readers = [...document.querySelectorAll('.chapter-reader')];
 function syncReader() {
   const hash = window.location.hash;
-  const id = hash === '#father-suit' ? 'story-reader' : hash === '#father-suit-2' ? 'story-reader-2' : hash === '#kindergarten-uniform' ? 'uniform-reader' : null;
+  const id = hash === '#father-suit' ? 'story-reader' : hash === '#father-suit-2' ? 'story-reader-2' : hash === '#kindergarten-uniform' ? 'uniform-reader' : hash === '#grandmothers-cardigan' ? 'cardigan-reader' : null;
   const previousReader = readers.find(r => !r.hidden);
   const wasReading = document.body.classList.contains('reading');
   readers.forEach(r => r.hidden = r.id !== id);
@@ -162,7 +162,7 @@ function syncReader() {
     finishOpening();
     if (dialog.open) dialog.close();
     document.body.classList.add('reading');
-    document.title = langText(id === 'uniform-reader' ? '아이의 유치원복' : '아버지의 양복') + (id === 'story-reader-2' ? ' · ' + langText('2장') : '') + ' · ' + langText('아직 따뜻한 세탁소');
+    document.title = langText(id === 'uniform-reader' ? '아이의 유치원복' : id === 'cardigan-reader' ? '할머니의 니트' : '아버지의 양복') + (id === 'story-reader-2' ? ' · ' + langText('2장') : '') + ' · ' + langText('아직 따뜻한 세탁소');
     window.scrollTo({top:0,behavior:'instant'});
     document.querySelector('#' + id + ' h1').focus({preventScroll:true});
   } else if (wasReading) {
@@ -171,14 +171,14 @@ function syncReader() {
     const target = document.querySelector(hash === '#keepsakes' ? '#keepsakes' : hash === '#about' ? '#about' : '#stories');
     target.scrollIntoView({behavior:'instant'});
     if (target.id === 'stories') {
-      const card = previousReader?.id === 'uniform-reader' ? document.querySelector('#uniform-open') : opener;
+      const card = previousReader?.id === 'uniform-reader' ? document.querySelector('#uniform-open') : previousReader?.id === 'cardigan-reader' ? document.querySelector('#cardigan-open') : opener;
       card.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
       card.focus({preventScroll:true});
     }
   }
 }
 window.addEventListener('hashchange', syncReader);
-document.querySelectorAll('.reader-end a[href^="#father-suit"],.reader-end a[href="#kindergarten-uniform"]').forEach(a => a.addEventListener('click', () => {
+document.querySelectorAll('.reader-end a[href^="#father-suit"],.reader-end a[href="#kindergarten-uniform"],.reader-end a[href="#grandmothers-cardigan"]').forEach(a => a.addEventListener('click', () => {
   if (a.getAttribute('href') === window.location.hash) syncReader();
 }));
 syncReader();
