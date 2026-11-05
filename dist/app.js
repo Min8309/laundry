@@ -113,7 +113,7 @@ function syncReader() {
   } else if (wasReading) {
     document.body.classList.remove('reading');
     document.title = langText('아직 따뜻한 세탁소');
-    const target = document.querySelector(hash === '#about' ? '#about' : '#stories');
+    const target = document.querySelector(hash === '#keepsakes' ? '#keepsakes' : hash === '#about' ? '#about' : '#stories');
     target.scrollIntoView({behavior:'instant'});
     if (target.id === 'stories') opener.focus({preventScroll:true});
   }
