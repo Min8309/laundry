@@ -56,29 +56,83 @@ const musicToggle = document.querySelector('.sound-toggle');
 const musicLabel = document.querySelector('.sound-label');
 const soundStatus = document.querySelector('.sound-status');
 let musicRequest = 0;
-music.volume = 0.25;
+let musicEnabled = false;
+const musicVolume = 0.25;
+const narrationMusicVolume = 0.07;
+let musicContext;
+let musicGain;
+let volumeFrame;
+music.volume = musicVolume;
 music.muted = true;
+function musicTargetVolume() {
+  return !narration.paused && !narration.ended && !narration.error ? narrationMusicVolume : musicVolume;
+}
+function prepareMusicAudio() {
+  // Create/resume inside the button gesture. iOS ignores media-element volume,
+  // so route the same-origin soundtrack through a single reusable GainNode.
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!musicContext && AudioContext) {
+    musicContext = new AudioContext();
+    musicGain = musicContext.createGain();
+    musicGain.gain.value = musicTargetVolume();
+    musicContext.createMediaElementSource(music).connect(musicGain);
+    musicGain.connect(musicContext.destination);
+    music.volume = 1;
+  }
+  return musicContext ? musicContext.resume() : Promise.resolve();
+}
+function syncMusicVolume(immediate = false) {
+  cancelAnimationFrame(volumeFrame);
+  if (!musicEnabled) return;
+  const target = musicTargetVolume();
+  if (musicGain) {
+    const gain = musicGain.gain;
+    const now = musicContext.currentTime;
+    // Retarget from the current value when pause/play interrupts a fade.
+    const current = gain.value;
+    gain.cancelScheduledValues(now);
+    gain.setValueAtTime(current, now);
+    if (immediate) gain.setValueAtTime(target, now);
+    else gain.setTargetAtTime(target, now, 0.12);
+  } else {
+    // Older browsers retain media-element playback without Web Audio.
+    const start = music.volume;
+    const started = performance.now();
+    function fade(now) {
+      if (!musicEnabled) return;
+      const progress = immediate ? 1 : Math.min((now - started) / 400, 1);
+      music.volume = start + (target - start) * progress;
+      if (progress < 1) volumeFrame = requestAnimationFrame(fade);
+    }
+    fade(started);
+  }
+}
 function updateMusicUI(isPlaying) {
   musicToggle.setAttribute('aria-pressed', String(isPlaying));
   musicLabel.textContent = langText(isPlaying ? '음악 끄기' : '음악 켜기');
 }
 function stopMusic() {
   musicRequest++;
+  musicEnabled = false;
+  cancelAnimationFrame(volumeFrame);
   music.pause();
   music.muted = true;
   updateMusicUI(false);
 }
 musicToggle.addEventListener('click', async () => {
   soundStatus.textContent = '';
-  if (!music.paused || musicToggle.getAttribute('aria-pressed') === 'true') {
+  if (musicEnabled) {
     stopMusic();
     return;
   }
   const request = ++musicRequest;
+  musicEnabled = true;
   music.muted = false;
-  music.volume = 0.25;
   try {
-    await music.play();
+    const ready = prepareMusicAudio();
+    syncMusicVolume(true);
+    // Both calls happen before awaiting, preserving the mobile user gesture.
+    await Promise.all([ready, music.play()]);
     if (request !== musicRequest) return;
     updateMusicUI(true);
   } catch (_) {
@@ -92,7 +146,7 @@ music.addEventListener('error', () => {
   soundStatus.textContent = langText('음악을 불러오지 못했어요. 연결을 확인하고 다시 눌러 주세요.');
 });
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden && !music.paused) stopMusic();
+  if (document.hidden) stopMusic();
 });
 window.addEventListener('pagehide', stopMusic);
 
@@ -124,12 +178,12 @@ document.querySelectorAll('.reader-end a[href^="#father-suit"]').forEach(a => a.
 }));
 syncReader();
 
-// Chapter one narration starts only on request and never overlaps the soundtrack.
+// Chapter one narration starts only on request; music ducks while it plays.
 const narration = document.querySelector('#chapter-narration');
 const narrationToggle = document.querySelector('#narration-toggle');
 const narrationStatus = document.querySelector('.narration-status');
 function updateNarrationUI() {
-  const active = !narration.paused && !narration.ended;
+  const active = !narration.paused && !narration.ended && !narration.error;
   const english = document.documentElement.lang === 'en';
   narrationToggle.setAttribute('aria-pressed', String(active));
   narrationToggle.querySelector('.narration-label').textContent = english ? (active ? 'Pause narration' : 'Listen to the story') : (active ? '일시정지' : '이야기 듣기');
@@ -140,15 +194,16 @@ function updateNarrationUI() {
 narrationToggle.addEventListener('click', async () => {
   narrationStatus.textContent = '';
   if (!narration.paused) { narration.pause(); return; }
-  stopMusic();
   try { await narration.play(); }
   catch (_) { narrationStatus.textContent = document.documentElement.lang === 'en' ? 'Unable to play. Please try again.' : '음성을 재생하지 못했어요. 다시 눌러 주세요.'; }
 });
-['play', 'pause', 'ended'].forEach(event => narration.addEventListener(event, updateNarrationUI));
+['play', 'pause', 'ended', 'error'].forEach(event => narration.addEventListener(event, () => {
+  updateNarrationUI();
+  syncMusicVolume();
+}));
 narration.addEventListener('error', () => {
   narrationStatus.textContent = document.documentElement.lang === 'en' ? 'Unable to load the narration. Please try again.' : '음성을 불러오지 못했어요. 다시 시도해 주세요.';
 });
-music.addEventListener('play', () => narration.pause());
 window.addEventListener('hashchange', () => { if (location.hash !== '#father-suit') narration.pause(); });
 window.addEventListener('pagehide', () => narration.pause());
 document.addEventListener('visibilitychange', () => { if (document.hidden) narration.pause(); });
