@@ -88,3 +88,32 @@ html[lang=en] .hero-copy>.english{display:none}
 @media(prefers-reduced-motion:reduce){.clothes-rail{scroll-behavior:auto}}
 
 #uniform-narration-toggle:disabled,#cardigan-narration-toggle:disabled{opacity:.65;cursor:default;animation:none;box-shadow:none}
+
+/* A garment is the entrance; the original photographs and quiet palette remain. */
+.browse-guide{max-width:620px;margin:24px 0 0;color:var(--muted);font:14px/1.9 var(--serif)}
+.garment-trace{display:block;margin-top:16px;padding-top:12px;border-top:1px solid #716c5e44;font:12px/1.8 var(--serif);color:#555344}
+.reading-estimate,.audio-available{display:block;margin-top:8px;font:12px/1.7 var(--serif);color:#555344}
+.garment-state{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 18px;border:1px solid #756145;border-radius:999px;font:13px/1.5 var(--serif);color:#4a3924}
+.reader-estimate{color:var(--muted);font:13px/1.8 var(--serif);margin:0 0 20px}
+.read-shortcut{display:inline-flex;align-items:center;min-height:44px;padding:11px 20px;font:14px/1.5 var(--serif)}
+.story-body{scroll-margin-top:150px}.story-body:focus-visible{outline:1px solid var(--gold);outline-offset:8px}
+.laundry-memo{margin-top:48px;padding:24px 0;border-top:1px solid #c6b99744;color:var(--muted)}
+.laundry-memo h2{font:14px/1.7 var(--serif);color:var(--gold);margin:0 0 12px}.laundry-memo p{font:16px/1.9 var(--serif);margin:0}
+.hero-purpose{font:13px/1.9 var(--serif);color:var(--paper);margin:18px 0 0;max-width:390px}
+@media(max-width:700px){.hero-copy{top:28%}.hero-purpose{font-size:12px}.browse-guide{font-size:12px}.story-carousel{margin-top:18px}.story-slide{flex-basis:calc(100% - 42px)}.reader-article h1{margin-bottom:24px}.laundry-memo p{font-size:14px}}
+/* Let longer bilingual introductions and enlarged text determine hero height. */
+.hero{height:auto;max-height:none;min-height:100svh;padding:180px 0 130px}
+.hero-copy,html[lang=en] .hero-copy{position:relative;top:auto;bottom:auto;margin:0;left:8%;width:84%;max-width:570px}
+@media(max-width:700px){.hero{padding-top:155px;padding-bottom:125px;min-height:740px}.hero-copy,html[lang=en] .hero-copy{top:auto;bottom:auto;max-width:84%}}
+/* A dedicated bottom bar preserves the requested bottom-right music control.
+   Opaque backing separates it from scrolling text; end padding keeps the last
+   content reachable above the bar, including device safe areas. */
+:root{--sound-bar-height:80px}
+body{padding-bottom:calc(var(--sound-bar-height) + env(safe-area-inset-bottom))}
+html{scroll-padding-bottom:calc(var(--sound-bar-height) + env(safe-area-inset-bottom) + 16px)}
+.sound-dock,.reading .sound-dock{position:fixed;inset:auto 0 0;box-sizing:border-box;width:100%;max-width:none;min-height:calc(var(--sound-bar-height) + env(safe-area-inset-bottom));padding:14px max(24px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom));justify-content:flex-end;gap:12px;background:#171c1b;border-top:1px solid #c6b99726;opacity:1}
+.sound-dock .sound-status{position:static;max-width:min(55vw,480px);white-space:normal;order:-1}
+@media(max-width:700px){.sound-dock{padding-right:max(18px,env(safe-area-inset-right))}.sound-dock .sound-status{font-size:11px}}
+
+.site-subtitle{font:16px/1.8 var(--serif);color:var(--paper);margin:18px 0 26px;letter-spacing:.02em}
+@media(max-width:700px){.site-subtitle{font-size:14px}}

@@ -1,54 +1,11 @@
 const langText = s => window.laundryText ? window.laundryText(s) : s;
 const dialog = document.querySelector('#episode-dialog');
 const opener = document.querySelector('#episode-open');
-opener.addEventListener('click', () => dialog.showModal());
 dialog.querySelectorAll('.close, .back').forEach(button => button.addEventListener('click', () => dialog.close()));
 dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
 dialog.addEventListener('close', () => opener.focus({preventScroll:true}));
 
-// Show once per tab session. The story remains available immediately via Skip,
-// navigation, Escape or scrolling. Reduced-motion visitors go straight to it.
-const opening = document.querySelector('#opening');
-const heroCopy = document.querySelector('.hero-copy');
-const replay = document.querySelector('.opening-replay');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let openingTimer;
-let playing = false;
-function rememberOpening() { try { sessionStorage.setItem('warm-laundry-opening-seen', 'yes'); } catch (_) {} }
-function finishOpening() {
-  if (!playing) return;
-  const skipHadFocus = document.activeElement === opening.querySelector('button');
-  playing = false;
-  clearTimeout(openingTimer);
-  opening.hidden = true;
-  document.body.classList.remove('is-opening');
-  heroCopy.inert = false;
-  rememberOpening();
-  if (skipHadFocus) document.querySelector('.enter').focus({preventScroll:true});
-}
-function startOpening() {
-  if (reducedMotion.matches) return;
-  clearTimeout(openingTimer);
-  playing = true;
-  opening.hidden = false;
-  heroCopy.inert = true;
-  document.body.classList.add('is-opening');
-  openingTimer = setTimeout(finishOpening, 10000);
-}
-opening.querySelector('.opening-skip').addEventListener('click', finishOpening);
-replay.addEventListener('click', () => {
-  window.scrollTo({top:0,behavior:'instant'});
-  startOpening();
-  opening.querySelector('button').focus({preventScroll:true});
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && playing) finishOpening(); });
-document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', finishOpening));
-window.addEventListener('wheel', finishOpening, {passive:true});
-window.addEventListener('touchmove', finishOpening, {passive:true});
-reducedMotion.addEventListener('change', e => { if (e.matches) finishOpening(); });
-let seenOpening = false;
-try { seenOpening = sessionStorage.getItem('warm-laundry-opening-seen') === 'yes'; } catch (_) {}
-if (!seenOpening && !window.location.hash && !reducedMotion.matches) startOpening();
+// Visitors enter immediately; the alley motion has been removed.
 
 // User-supplied soundtrack. Never autoplay or restore a previous playing state.
 const music = document.querySelector('#background-music');
@@ -159,7 +116,6 @@ function syncReader() {
   const wasReading = document.body.classList.contains('reading');
   readers.forEach(r => r.hidden = r.id !== id);
   if (id) {
-    finishOpening();
     if (dialog.open) dialog.close();
     document.body.classList.add('reading');
     document.title = langText(id === 'uniform-reader' ? '아이의 유치원복' : id === 'cardigan-reader' ? '할머니의 니트' : '아버지의 양복') + (id === 'story-reader-2' ? ' · ' + langText('2장') : '') + ' · ' + langText('아직 따뜻한 세탁소');
